@@ -1,4 +1,21 @@
-﻿$(function() {
+﻿
+var mm = com.modestmaps;
+wax.tilejson(
+  'http://tiles.mapbox.com/ruben/api/Tileset/map-592sxtoe',
+  function(tilejson) {
+      var m = new mm.Map('map-div',
+      new wax.mm.connector(tilejson))
+      wax.mm.interaction(m, tilejson);
+      wax.mm.pointselector(m, tilejson, {
+          callback: function(coords) {
+              $('#pointselector-text').text(coords.join(' - '));
+          }
+      });
+      m.setCenterZoom(new mm.Location(-13.159725, -74.22431), 17);
+  }
+);
+
+$(function() {
     
 
 
